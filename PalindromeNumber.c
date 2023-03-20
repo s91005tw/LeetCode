@@ -41,13 +41,16 @@ _Bool isPalindrome(int x){
                     for(j=1 ; Mid-j > 0 ; j++){
                         printf("\nj = %d\n", j);
                         //printf("Mid-j = %d\n", Mid-j);
-                        printf("Mid+j+1 = %d\n", Mid+j+1);
-                        printf("pow(10,Mid+j+1) = %d\n", pow(10,Mid+j));
-                        printf("pow(10,Mid+j) = %d\n", pow(10,Mid+j-1));
-                        printf("x/pow(10,Mid+j+1) = %d\n", x/pow(10,Mid+j));
+                        printf("Mid+j = %d\n", Mid+j);
+                        printf("pow(10,Mid) = %d\n", pow(10,Mid+j));
+                        printf("x/pow(10,Mid+j) = %d\n", x/pow(10,Mid+j));
 
-                        printf("x/pow(10,Mid+j+1) * pow(10,Mid+j)= %d\n", x/pow(10,Mid+j+1) * pow(10,Mid+j));
-                        printf("x - (x/pow(10,Mid+j+1) * pow(10,Mid+j)) = %d\n", x - (x/pow(10,Mid+j+1) * pow(10,Mid+j)) );
+                        printf("x/pow(10,Mid+j+1) * pow(10,Mid+j)= %d\n", (x/pow(10,Mid+j)) * pow(10,Mid+j));
+                        printf("x - (x/pow(10,Mid+j)) * pow(10,Mid+j) = %d\n", x - (x/pow(10,Mid+j)) * pow(10,Mid+j) );
+
+                        printf("最高位 = %d\n", (x - (x/pow(10,Mid+j)) * pow(10,Mid+j))/pow(10,Mid+j-1) );
+
+
                     }
                 }
                 else{
