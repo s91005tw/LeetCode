@@ -3,20 +3,9 @@
 #include <stdlib.h>
 //test
 
-int pow(int x, int y){
-    //int Result = y;
-    if(y>=1){
-        return x * pow(x,y-1);
-    }
-    else{
-        return 1;
-    }
-
-}
-
 
 _Bool isPalindrome(int x){
-    int i,j, Mid;
+    int i,j, Mid, High, Pow, Temp, Left, Right;
 
     if(x<0){
         return 0;
@@ -28,9 +17,18 @@ _Bool isPalindrome(int x){
         printf("輸入 = %d\n", x);
 
         for(i=9;i>=0;i--){
-            //printf("10^%d = %d\n", i,pow(10,i));
-            if((x/pow(10,i)) >= 1){
-                printf("output = %d\n", (x/pow(10,i)));
+
+            Pow = 1;
+            Temp = i;
+            while(Temp>0){
+                Pow = Pow*10;
+                Temp--;
+            }
+            //printf("Pow = %d\n", Pow);
+
+            High = (x/Pow);
+            if(High >= 1){
+                printf("output = %d\n", High);
                 printf("位數 = %d\n", i+1);
 
                 if((i+1)%2 >= 1){
@@ -39,21 +37,27 @@ _Bool isPalindrome(int x){
                     printf("Mid = %d\n", Mid);
 
                     for(j=1 ; Mid-j > 0 ; j++){
-                        //printf("\nj = %d\n", j);
-                        //printf("Mid-j = %d\n", Mid-j);
-                        //printf("Mid+j = %d\n", Mid+j);
-                        //printf("pow(10,Mid) = %d\n", pow(10,Mid+j));
-                        //printf("x/pow(10,Mid+j) = %d\n", x/pow(10,Mid+j));
-                        //printf("x/pow(10,Mid+j+1) * pow(10,Mid+j)= %d\n", (x/pow(10,Mid+j)) * pow(10,Mid+j));
-                        //printf("x - (x/pow(10,Mid+j)) * pow(10,Mid+j) = %d\n", x - (x/pow(10,Mid+j)) * pow(10,Mid+j) );
 
-                        //printf("最高位 = %d\n", (x - (x/pow(10,Mid+j)) * pow(10,Mid+j))/pow(10,Mid+j-1) );
-                        //printf("最低位 = %d\n", (x - (x/pow(10,Mid-j)) * pow(10,Mid-j))/pow(10,Mid-j-1) );
-                        if((x - (x/pow(10,Mid+j)) * pow(10,Mid+j))/pow(10,Mid+j-1)  !=  (x - (x/pow(10,Mid-j)) * pow(10,Mid-j))/pow(10,Mid-j-1)){
+                        Pow = 1;
+                        Temp = Mid+j;
+                        while(Temp>1){
+                            Pow = Pow*10;
+                            Temp--;
+                        }
+                        Left = ((x - ((x/(Pow*10)) * (Pow*10)))/(Pow));
+
+                        Pow = 1;
+                        Temp = Mid-j;
+                        while(Temp>0){
+                            Pow = Pow*10;
+                            Temp--;
+                        }
+                        Right = ((x - ((x/Pow) * Pow))/(Pow/10));
+
+                        if( Left  !=  Right){
                             printf("不符合\n");
                             return 0;
                         }
-
                     }
                 }
                 else{
@@ -61,18 +65,26 @@ _Bool isPalindrome(int x){
                     Mid = (i+1)/2;
                     printf("Mid = %d\n", Mid);
 
-                    for(j=1 ; Mid-j >= 0 ; j++){
-                        //printf("\nj = %d\n", j);
-                        //printf("Mid-j = %d\n", Mid-j);
-                        //printf("Mid+j = %d\n", Mid+j);
-                        //printf("pow(10,Mid) = %d\n", pow(10,Mid+j));
-                        //printf("x/pow(10,Mid+j) = %d\n", x/pow(10,Mid+j));
-                        //printf("x/pow(10,Mid+j+1) * pow(10,Mid+j)= %d\n", (x/pow(10,Mid+j)) * pow(10,Mid+j));
-                        //printf("x - (x/pow(10,Mid+j)) * pow(10,Mid+j) = %d\n", x - (x/pow(10,Mid+j)) * pow(10,Mid+j) );
+                    for(j=1 ; Mid+j <= (i+1) ; j++){
 
-                        //printf("最高位 = %d\n", (x - (x/pow(10,Mid+j)) * pow(10,Mid+j))/pow(10,Mid+j-1) );
-                        //printf("最低位 = %d\n", (x - (x/pow(10,Mid-j+1)) * pow(10,Mid-j+1))/pow(10,Mid-j) );
-                        if((x - (x/pow(10,Mid+j)) * pow(10,Mid+j))/pow(10,Mid+j-1)  !=  (x - (x/pow(10,Mid-j+1)) * pow(10,Mid-j+1))/pow(10,Mid-j) ){
+                        Pow = 1;
+                        Temp = Mid+j;
+                        while(Temp>1){
+                            Pow = Pow*10;
+                            Temp--;
+                        }
+                        Left = ((x - ((x/Pow) * Pow))/(Pow/10));
+                        printf("Left = %d\n", Left);
+                        Pow = 1;
+                        Temp = Mid-j+1;
+                        while(Temp>0){
+                            Pow = Pow*10;
+                            Temp--;
+                        }
+                        Right = ((x - ((x/Pow) * Pow))/(Pow/10));
+                        printf("Right = %d\n", Right);
+
+                        if( Left  !=  Right){
                             printf("不符合\n");
                             return 0;
                         }
@@ -91,7 +103,7 @@ _Bool isPalindrome(int x){
 int main(){
     _Bool test;
 
-    test = isPalindrome(1234554321);
+    test = isPalindrome(10);
     if(test){
         printf("test = %d", test);
     }
