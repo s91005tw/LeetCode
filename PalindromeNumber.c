@@ -69,11 +69,19 @@ _Bool isPalindrome(int x){
 
                         Pow = 1;
                         Temp = Mid+j;
-                        while(Temp>1){
-                            Pow = Pow*10;
-                            Temp--;
+
+                        if(Temp == i+1){
+                            Left = High;
                         }
-                        Left = ((x - ((x/Pow) * Pow))/(Pow/10));
+                        else{
+                            while(Temp>0){
+                                Pow = Pow*10;
+                                Temp--;
+                            }
+                            Left = ((x - ((x/Pow) * Pow))/(Pow/10));
+                        }
+
+
                         printf("Left = %d\n", Left);
                         Pow = 1;
                         Temp = Mid-j+1;
@@ -103,7 +111,7 @@ _Bool isPalindrome(int x){
 int main(){
     _Bool test;
 
-    test = isPalindrome(10);
+    test = isPalindrome(2000000002);
     if(test){
         printf("test = %d", test);
     }
