@@ -4,8 +4,11 @@
 int romanToInt(char * s){
     int i;
 
-    for(i=0; i<4; i++){
-        printf("%c", s);
+    for(i=0; ; i++){
+        if(s[i] == '\0' ){
+            break;
+        }
+        printf("%c", s[i]);
     }
     printf("\n");
 
@@ -16,9 +19,9 @@ int romanToInt(char * s){
 
 int main(){
     int Numerals;
-    char *RomanNumerals;
+    char RomanNumerals[] = "vix";
     printf("test\n");
-    RomanNumerals = 'vix';
+    //RomanNumerals[] = "vix";
 
     Numerals = romanToInt(RomanNumerals);
 
